@@ -2,7 +2,7 @@ import numpy as np
 import sys
 import time
 
-img_path = '/home/streinge/0.0/00.pgm'
+img_path = '/home/streinge/0.1/00.pgm'
 t1 = time.perf_counter()
 # np.loadtxt записывает в ОДНОМЕРНЫЙ массив изображение из файла, 
 # исключая первые три строки, разделитель пробел, тип целые числа от нуля до 255
@@ -35,14 +35,12 @@ dim_not_null = tuple_needed_index[0].shape[0]
 not_null = np.zeros([dim_not_null, 2])
 for i in range(tuple_needed_index[0].shape[0]):
     not_null[i] = np.array([tuple_needed_index[1][i], tuple_needed_index[0][i]])
-height_triangle = np.zeros(not_null.shape[0])
-c = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
-print('c ', c)
+area_triangle = np.zeros(not_null.shape[0])
 for i in range(not_null.shape[0]):
-    b = ((not_null[i][0] - x2) ** 2 + (not_null[i][1] - y2) ** 2) ** 0.5
-    a = ((not_null[i][0] - x1) ** 2 + (not_null[i][1] - y1) ** 2) ** 0.5
-    height_triangle[i] = b ** 2 - (c ** 2 + b ** 2 - a ** 2) / (2 * c)
-print(height_triangle[0:10])
+    area_triangle[i] = abs(0.5 *((x1 - not_null[i][0]) * (y2 - not_null[i][1]) - (x2 - not_null[i][0]) * (y1 - not_null[i][1])))
+
+point_3 = not_null[np.argmax(area_triangle)]
+print(point_3)
 
 
 
