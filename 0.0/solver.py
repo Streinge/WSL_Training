@@ -2,7 +2,8 @@ import numpy as np
 import sys
 import time
 
-img_path = '/home/streinge/WSL_Training/0.1/01.pgm'
+# img_path = '/home/streinge/WSL_Training/0.1/01.pgm'
+img_path = '/home/streinge/0.1/01.pgm'
 t1 = time.perf_counter()
 # np.loadtxt записывает в ОДНОМЕРНЫЙ массив изображение из файла, 
 # исключая первые три строки, разделитель пробел, тип целые числа от нуля до 255
@@ -46,11 +47,19 @@ if count_black > 0.9:
     print(point_3)
 else:
     print('Будем делать преобразование Хафа')
-    print('число ПИ ', np.round(np.pi, 8))
-    theta = np.array(180)
+    PI = np.round(np.pi, 8)
+    theta = np.array(np.zeros(181))
+    t_part1 = time.perf_counter()
+    for i in range(-90, 91):
+        theta[i] = np.round((PI * i) / 180, 8)
+    theta = np.sort(theta)
     print(theta)
-
-
+    
+    cos_theta = np.cos(theta)
+    sin_theta = np.sin(theta)
+    print(cos_theta)
+    print(sin_theta)
+    t_part2 = time.perf_counter()
 
 
 
@@ -59,3 +68,4 @@ else:
 
 t2 = time.perf_counter()
 print(f"Вычисление заняло {t2 - t1:0.4f} секунд")
+print(f"Вычисление ЧАСТНОЕ заняло {t_part2 - t_part1:0.4f} секунд")
