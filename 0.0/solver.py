@@ -2,8 +2,8 @@ import numpy as np
 import sys
 import time
 
-img_path = '/home/streinge/WSL_Training/0.1/00.pgm'
-# img_path = '/home/streinge/0.1/01.pgm'
+# img_path = '/home/streinge/WSL_Training/0.1/00.pgm'
+img_path = '/home/streinge/0.1/01.pgm'
 t1 = time.perf_counter()
 DIM_X = 500
 DIM_Y = 500
@@ -79,7 +79,8 @@ else:
             counter[r_0, theta_0] += 1
 
     maxi = counter[np.argmax(counter, axis=0), np.arange(180)]
-    print(maxi)
+
+    print(np.argmax(counter, axis=0))
 
     t_part2 = time.perf_counter()
 
