@@ -2,8 +2,8 @@ import numpy as np
 import sys
 import time
 
-# img_path = '/home/streinge/WSL_Training/0.1/00.pgm'
-img_path = '/home/streinge/0.1/01.pgm'
+img_path = '/home/streinge/WSL_Training/0.1/00.pgm'
+# img_path = '/home/streinge/0.1/00.pgm'
 t1 = time.perf_counter()
 DIM_X = 500
 DIM_Y = 500
@@ -75,12 +75,19 @@ else:
     counter = np.zeros((int(round(2 * r_max)), THETA_MAX), dtype=np.uint8)
     for i in range(len(y_test)):
         for theta_0 in range(THETA_MAX):
-            r_0 = int(round(x_test[i] * cos_theta[theta_0] + y_test[i] * sin_theta[theta_0]))
+            r_0 = int(np.round(x_test[i] * cos_theta[theta_0] + y_test[i] * sin_theta[theta_0]))
             counter[r_0, theta_0] += 1
 
-    maxi = counter[np.argmax(counter, axis=0), np.arange(180)]
+    # maxi = counter[np.argmax(counter, axis=0), np.arange(180)]
+    count_max = np.sort(counter.flatten())[-3:]
+    line_3 = count_max[2]
+    param_line_3 = np.where(counter == line_3)
+    print(param_line_3)
 
-    print(np.argmax(counter, axis=0))
+    # Это я нашел параметры индексы прямой с наибольшим значением счетчика
+    # Дальше была идея вывести все точки из изображения, которые принадлежат этой прямой с какой то дельтой
+    # и сравить с координатами, которые есть в решении, чтобы понять вообще я правильно думаю
+    
 
     t_part2 = time.perf_counter()
 
